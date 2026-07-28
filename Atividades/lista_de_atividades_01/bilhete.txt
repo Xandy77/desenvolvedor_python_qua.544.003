@@ -1,0 +1,6 @@
+===== BILHETE DE CINEMA =====
+Nome : Tchuco
+Idade: 4
+Sala : 1
+Filme: A Volta dos Que Não Foram
+=============================
