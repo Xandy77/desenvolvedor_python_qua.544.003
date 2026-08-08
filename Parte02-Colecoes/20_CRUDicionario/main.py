@@ -36,11 +36,31 @@ while True:
                 print(f"{'-'*40}")
             continue
         case "3":
-            # TODO: fazer alterar usuário
-            pass
+            nome = input("Informe o nome a ser pesquisado: ").strip().title()
+            for usuario in usuarios:
+                if nome in usuario['nome']:
+                    # 2º Menu
+                    print("nome:")
+                    print("CPF:")
+                    print("email:")
+                    print("Cancelar")
+                    alterar = input("Qual chave deseja alterar? ").strip().lower()
+                    if alterar in usuario:
+                        usuario[alterar] = input("Informe o novo valor: ").strip()
+                        print("Alterado com sucesso.")
+                else:
+                    print("Usuário não encontrado.")
+            
         case "4":
-            # TODO: excluir usuário
-            pass
+            nome = input("Informe o nome a deletado: ").strip().title()
+            for usuario in usuarios:
+                if nome in usuario["nome"]:
+                    indice = usuarios.index(usuario)
+                    usuarios.remove(usuario)
+                    print("Usuário deletado com sucesso!")
+                else:
+                    print("Usuário não encontrado.")
+            continue
         case "5":
             break
         case _:
