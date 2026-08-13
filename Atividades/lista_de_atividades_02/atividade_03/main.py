@@ -1,21 +1,10 @@
 import json
 import os
 
-ARQUIVO_JSON = "alunos_notas.json"
+alunos = [] # a lista não pode ficar dentro while true para não reiniciar a lista
 
 # Limpa a tela
 os.system("cls" if os.name == "nt" else "clear")
-
-# Verifica se o arquivo JSON existe
-if os.path.exists(ARQUIVO_JSON):
-
-    arquivo = open(ARQUIVO_JSON, "r", encoding="utf-8")
-    alunos = json.load(arquivo)
-    arquivo.close()
-
-else:
-    alunos = []
-
 
 while True:
 
@@ -23,73 +12,40 @@ while True:
     print("2 - Sair")
     
     opcao = input("Escolha uma opção: ").strip()
+    os.system("cls" if os.name == "nt" else "clear")
 
     match opcao:
 
         case "1":
+            # criando dicionário
+            aluno = {}
+            notas = [0,0,0]
 
-            # Solicita o nome do aluno
-            nome = input("\nInforme o nome do aluno: ").strip().title()
-
-            # Cria uma lista para armazenar as notas
-            notas = []
-
-            # Solicita as 3 notas
-            for i in range(1, 4):
-
-                nota = float(
-                    input(f"Informe a {i}ª nota do aluno: ")
-                    .replace(",", ".")
-                )
-
-                # Verifica se a nota está entre 0 e 10
-                while nota < 0 or nota > 10:
-
-                    print("A nota deve estar entre 0 e 10.")
-
-                    nota = float(
-                        input(f"Informe novamente a {i}ª nota: ")
-                        .replace(",", ".")
-                    )
-
-                # Adiciona a nota na lista
-                notas.append(nota)
-
-            # Calcula a média
-            media = sum(notas) / len(notas)
-
-            # Verifica a situação
-            if media >= 7:
-                situacao = "Aprovado"
-            else:
-                situacao = "Reprovado"
-
-            # Mostra o resultado
-            print(f"Aluno: {nome}")
-            print(f"Notas: {notas}")
-            print(f"Média: {media:.2f}")
-            print(f"Situação: {situacao}")
-           
-
-            # Cria o dicionário do aluno
-            aluno = {
-                "nome": nome,
-                "notas": notas,
-                "media": round(media, 2),
-                "situacao": situacao
-            }
-
-            # Adiciona o aluno à lista
+            aluno['nome'] = input("Informe o nome do aluno: ").strip().title()
+            for i in range(len(notas)):
+                notas[i] = float(input(f"Informe a {i+1}ª nota: ").replace(",","."))
+            aluno['notas'] = notas
+            aluno['média'] = sum(notas)/len(notas)
+            aluno['resultado'] = "aprovado" if aluno ['média'] >= 7 else "reprovado"
             alunos.append(aluno)
 
-           
+            with open(f"arquivo.json", "w", encoding="utf-8") as f:
+                json.dump(alunos, f)
+                print("Dados do aluno gravados com sucesso!")
+                continue
 
         case "2":
-
-            print("\nPrograma encerrado!")
             break
 
         case _:
-
-            print("\nOpção inválida!")
-            print("Escolha 1 para cadastrar ou 2 para sair.")
+            print("Opção inválida.")
+            continue
+           
+        # TODO: atividade 03
+        # Crie um programa que receba o nome de um aluno e 3 notas.
+        # O programa deve calcular a média do aluno e informar se
+        # o aluno está aprovado (média mínima = 7) ou reprovado.
+        # O programa deve gravar esses dados em um JSON.
+        # Ao final, o usuário deverá escolher se deseja inserir as
+        # notas de outro aluno, que deverão ser gravadas no mesmo
+        # arquivo JSON.
