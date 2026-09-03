@@ -3,7 +3,7 @@
 # um número inteiro e o programa calcula a sequência de Fibonacci
 # até o número informado.
 
-'''
+
 def fibonacci(n):
     if n <= 1:
         return n
@@ -20,8 +20,9 @@ print("\nSequência de Fibonacci:")
 for i in range(n + 1):
     print(fibonacci(i), end=" ")
 
-'''
 
+
+'''
 # função para calcular Fibonacci
 def fibonacci(n):
     return n if n <= 1 else fibonacci(n-1) + fibonacci(n-2)
@@ -32,4 +33,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+'''
         
