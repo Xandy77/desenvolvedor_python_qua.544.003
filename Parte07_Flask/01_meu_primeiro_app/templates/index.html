@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Página Inicial</title> <!-- Tag title fechada corretamente -->
+</head> <!-- Tag head fechada corretamente -->
+<body>
+   <!-- Se 'nome' existir, mostra o nome. Senão, mostra 'Visitante' -->
+   <h1>Seja bem-vindo, {{ nome if nome else 'Visitante' }} 🐍😎!</h1>
+   
+   <a href="/novaPagina">Ir para a outra página</a>
+</body>
+</html>
